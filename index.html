@@ -7,5 +7,17 @@
 </head>
 <body>
     <h1>Ok</h1>
+    <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const res = await fetch('/.netlify/functions/env');
+    const { supabaseUrl, supabaseAnonKey } = await res.json();
+
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    const { data, error } = await supabase.from('your_table_name').select('*');
+    console.log(data, error);
+    </script>
+
 </body>
 </html>
